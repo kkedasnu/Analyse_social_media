@@ -39,7 +39,7 @@ graph = [
 ]
 
 # Указываем вершину
-first_versh = 1
+first_versh = 3
 short_path = deikstr(graph, first_versh)
 
 # Вывод результата на экран
