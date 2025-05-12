@@ -28,7 +28,7 @@ def deikstr(graph, first_versh):
 
         return short_path
 
-   # Пример графа
+# Пример графа
 graph = [
 [0, 8, 11, 0, 0, 13],
 [8, 0, 10, 15, 0, 0],
@@ -42,11 +42,11 @@ graph = [
 first_versh = 1
 short_path = deikstr(graph, first_versh)
 
-# Вывод резудьтата на экран
+# Вывод результата на экран
 print(f"Кратчайшие расстояния от вершины {first_versh }:")
 for versh, distance in enumerate(short_path):
     if distance == sys.maxsize:
-        print(f"с вершиной {versh} нет связей")
+        print(f"С вершиной {versh} нет связей")
     else:
         print(f"До вершины {versh} расстояние: {distance}")
 
