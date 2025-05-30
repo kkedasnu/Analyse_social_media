@@ -18,10 +18,11 @@ formula_average_degree = (n - 1) * p
 
 # Вывод характеристик графа
 print (G)
+nx.draw(G)
 
 # Вывод результатов и сравнение
-print(f"Средняя степень узла в графе: {average_degree_graph:.2f}")
-print(f"Средняя степень узла по формуле: {formula_average_degree:.2f}")
-print(f"Математическая разница: {average_degree_graph - formula_average_degree}")
+# print(f"Средняя степень узла в графе: {average_degree_graph:.2f}")
+# print(f"Средняя степень узла по формуле: {formula_average_degree:.2f}")
+#rint(f"Математическая разница: {average_degree_graph - formula_average_degree}")
 
 

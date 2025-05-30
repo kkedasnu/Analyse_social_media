@@ -1,39 +1,35 @@
 import networkx as nx
-import numpy as np
 
-def calc_cntr_vect_centrality(G):
-    # Для заданного графа
-    try:
-        centrality = nx.eigenvector_centrality_numpy(G)
-        print("Centrality:")
-        sorted_centrality = sorted(centrality.items(), key=lambda item: item[1], reverse=True)
-        for node, value in sorted_centrality:
-            print(f"Node {node}: {value:.4f}")
-    except nx.PowerIterationFailedConvergence:
-        print("Power iteration failed to converge. The graph might be disconnected or have other issues.")
-
-# Manually designed graph (refined)
+# Создаём пустой граф
 G = nx.Graph()
+
+# Добавляем 21 узел (нумерация с 0 до 20)
 G.add_nodes_from(range(21))
 
-# Create a central node (node 10) and connect it to most other nodes
-for i in range(21):
-    if i != 10 and i != 0 and i != 20:
-        G.add_edge(10, i)
+# Добавляем связи между узлами
+# Сначала создаём "ямки" на краях (узлы 0-5 и 15-20)
+for i in range(5):
+    G.add_edge(i, i+1)  # Связи между 0-1, 1-2, ..., 4-5
+for i in range(15, 20):  # Связи между 15-16, 16-17, ..., 19-20
+    G.add_edge(i, i+1)
 
-# Add some additional connections to create the desired pattern
-G.add_edge(1, 2)
-G.add_edge(2, 3)
-G.add_edge(4, 5)
-G.add_edge(5, 6)
-G.add_edge(6, 7)
-G.add_edge(18, 19)
+# Теперь создаём "горбик" в центре (узлы 6-14)
+# Добавляем больше связей для центральных узлов
+for i in range(6, 14):  # Центральные узлы
+    G.add_edge(i, i+1)  # Основные связи
+    if i < 10:          # Дополнительные связи для "горбика"
+        G.add_edge(i, i+2)
 
-# Add connections around node 10
-G.add_edge(8, 9)
-G.add_edge(9, 10)
-G.add_edge(10, 11)
-G.add_edge(11, 12)
+# Добавляем "пик" в центре (узел 10)
+G.add_edge(10, 8)  # Узел 10 соединён с узлами по бокам
+G.add_edge(10, 12)
 
-# Calculate and print centrality
-calc_cntr_vect_centrality(G)
+# Вычисляем собственную центральность
+centrality = nx.eigenvector_centrality(G)
+
+# Сортируем значения по узлам (от 0 до 20)
+sorted_values = [centrality[i] for i in range(21)]
+
+# Выводим значения на экран
+print("Централизация узлов:", sorted_values)
+
